@@ -1,2 +1,5 @@
 # osgvo-torch
-OSG VO's Torch image definitions
+OSGVO's Torch base image definitions for Docker
+
+http://torch.ch/
+
