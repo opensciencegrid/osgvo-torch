@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 
 MAINTAINER Mats Rynge <rynge@isi.edu>
 
-ADD .singularity.d /
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
 
@@ -32,6 +31,8 @@ RUN git clone https://github.com/torch/distro.git /opt/torch --recursive && \
     cd /opt/torch && \
     bash install-deps && \
     ./install.sh
+
+COPY .singularity.d /.singularity.d
 
 # some extra singularity stuff
 RUN cd / && \
