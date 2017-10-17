@@ -7,16 +7,40 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --allow-unauthenticated \
+        build-essential \
+        cmake \
+        curl \
+        g++ \
+        gcc \
         gdb \
+        gfortran \
         git \
+        git-core \
+        gnuplot \
+        gnuplot-x11 \
+        imagemagick \
+        ipython \
+        libfftw3-dev \
+        libgraphicsmagick1-dev \
+        libjpeg-dev \
+        libopenblas-base \
+        libopenblas-dev \
+        libpng-dev \
+        libqt4-dev \
+        libreadline-dev \
+        libsox-dev \
+        libsox-fmt-all \
         libssl-dev \
         libzmq3-dev \
+        ncurses-dev \
         python-dev \
         python-pip \
         python-zmq \
         software-properties-common \
+        sox \
         strace \
         sudo \
+        unzip \
         wget \
         && \
     apt-get clean && \
@@ -32,6 +56,9 @@ RUN mkdir -p /opt/torch
 RUN git clone https://github.com/torch/distro.git /opt/torch --recursive && \
     cd /opt/torch && \
     bash install-deps && \
+    cp pkg/torch/lib/TH/cmake/FindSSE.cmake pkg/torch/lib/TH/cmake/FindSSE.cmake.ORIG && \
+    perl -p -i -e 's/^CHECK_SSE.*//' pkg/torch/lib/TH/cmake/FindSSE.cmake && \
+    (diff -u pkg/torch/lib/TH/cmake/FindSSE.cmake.ORIG pkg/torch/lib/TH/cmake/FindSSE.cmake || true) && \
     ./install.sh
 
 COPY .singularity.d /.singularity.d
