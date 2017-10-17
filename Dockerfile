@@ -7,6 +7,7 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --allow-unauthenticated \
+        gdb \
         git \
         libssl-dev \
         libzmq3-dev \
@@ -14,6 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         python-pip \
         python-zmq \
         software-properties-common \
+        strace \
         sudo \
         wget \
         && \
